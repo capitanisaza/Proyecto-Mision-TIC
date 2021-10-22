@@ -7,6 +7,13 @@ exports.getUsers = (req, res) => {
   });
 };
 
+// consultar informacion de un usuario por el correo
+exports.getOneUsersbymail = (req, res) => {
+  Users.findOne({ Correo: req.body.Correo }).then((findOne) => {
+    res.status(200).json(findOne);
+  });
+};
+
 // Actualizar un usuario
 exports.updateOneUsers = (req, res) => {
   Users.findOne({ Id_User: req.body.Id_User }).then((findOne) => {
@@ -14,11 +21,12 @@ exports.updateOneUsers = (req, res) => {
       const updateUser = new Users({
         Id_User: req.body.Id_User,
         Nombre: req.body.Nombre,
+        Correo: req.body.Correo,
         Rol: req.body.Rol,
         Estado: req.body.Estado,
       });
       Users.findByIdAndUpdate({ Id_User: req.body.Id_User }, updateUser).then(
-        (productoResult) => {
+        (findByIdAndUpdate) => {
           res.status(200).json("Usuario Actualizado");
         }
       );
@@ -37,6 +45,7 @@ exports.addUsers = (req, res) => {
       const addUser = new Users({
         Id_User: req.body.Id_User,
         Nombre: req.body.Nombre,
+        Correo: req.body.Correo,
         Rol: req.body.Rol,
         Estado: "Inactivo",
       });

@@ -49,6 +49,23 @@ const api = {
       });
     }
   },
+  users:{
+    list() {
+      return CallApi("users");
+    },
+    create(Users){
+      return CallApi("users",{
+        method:"POST",
+        body:JSON.stringify(Users)
+      });
+    },
+    edit(data) {
+      return CallApi(`/products/${data.Correo}`, {
+        method: "PUT",
+        body: JSON.stringify(data),
+      });
+    },
+  },
 };
 
 export default api;
